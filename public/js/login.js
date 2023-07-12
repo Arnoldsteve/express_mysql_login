@@ -3,14 +3,14 @@ form.addEventListener("submit", () => {
     email: email.value,
     password: password.value,
   };
-  fetch("/aapi/login", {
+  fetch("/api/login", {
     method: "POST",
     body: JSON.stringify(login),
     headers: {
       "content-type": "application/json",
     },
   })
-    .then(res.json())
+    .then((res) => res.json())
     .then((data) => {
       if (data.status == "error") {
         success.style.display = "none";
@@ -18,7 +18,7 @@ form.addEventListener("submit", () => {
         error.innerText = data.error;
       } else {
         error.style.display = "none";
-        error.style.display = "block";
+        success.style.display = "block";
         success.innerText = data.success;
       }
     });

@@ -29,6 +29,9 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <a class="nav-link active" aria-current="page" href="#">Login</a>
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
             <a class="nav-link" href="/register">Register</a>
           </div>
         </div>
@@ -43,11 +46,23 @@
           <form onsubmit="return false;" id="form">
             <div class="mb-3">
               <label for="email" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="email" />
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                autocomplete="off"
+                required
+              />
             </div>
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password" />
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                autocomplete="off"
+                required
+              />
             </div>
             <div
               class="alert alert-danger"

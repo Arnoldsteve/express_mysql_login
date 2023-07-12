@@ -9,8 +9,6 @@ const register = async (req, res) => {
       error: "Please enter your email and password",
     });
   else {
-    // test
-    console.log(email);
     db.query(
       "SELECT email FROM users WHERE email = ?",
       [email],
@@ -23,9 +21,7 @@ const register = async (req, res) => {
             error: "Email has alredy been a registered",
           });
         else {
-          const password = bcrypt.hash(Npassword, 8);
-          //   testing
-          console.log(password);
+          const password = await bcrypt.hash(Npassword, 8);
           db.query(
             "INSERT INTO users SET ?",
             { email: email, password: password },

@@ -3,7 +3,7 @@ const db = require("../routes/db-config");
 const bcrypt = require("bcryptjs");
 
 const login = async (req, res) => {
-  const { email, password } = reg.body;
+  const { email, password } = req.body;
   if (!email || !password)
     return res.json({
       status: "error",
@@ -11,7 +11,7 @@ const login = async (req, res) => {
     });
   else {
     db.query(
-      "SELECT email FROM users WHERE email = ?",
+      "SELECT * FROM users WHERE email = ?",
       [email],
       async (Err, result) => {
         if (Err) throw Err;
@@ -21,14 +21,10 @@ const login = async (req, res) => {
             error: "Incorret Email or password",
           });
         else {
-          const token = jwt.sign(
-            { id: result[0], id },
-            process.env.JWT_SECRETE,
-            {
-              expiresIn: process.env.JWT_EXPIRES,
-              httpOnly: true,
-            }
-          );
+          const token = jwt.sign({ id: result[0].id }, process.env.JWT_SECRET, {
+            expiresIn: process.env.JWT_EXPIRES,
+            // httpOnly: true,
+          });
           const cookieOptions = {
             expiresIn: new Date(
               Date.now() + process.env.COOKIE_EXPIRES * 24 * 60 * 60 * 1000
@@ -36,7 +32,7 @@ const login = async (req, res) => {
             httpOnly: true,
           };
           res.cookie("userRegistered", token, cookieOptions);
-          returnres.json({ status: "success", success: "User logged in" });
+          return res.json({ status: "success", success: "User logged in" });
         }
       }
     );
