@@ -1,6 +1,6 @@
 const express = require("express");
 const loggedIn = require("../controllers/loggedIn");
-const logout = require("../controllers/logout");
+// const logout = require("../controllers/logout");
 // const { status } = require("express/lib/response");
 const router = express.Router();
 
@@ -17,6 +17,6 @@ router.get("/register", (req, res) => {
 router.get("/login", (req, res) => {
   res.sendFile("login.html", { root: "./public" });
 });
-router.post("/logout", logout);
+// router.post("/logout", logout);
 
 module.exports = router;
